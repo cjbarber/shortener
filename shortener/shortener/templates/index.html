@@ -1,0 +1,51 @@
+<html>
+<head>
+  <title>Shortener</title>
+  <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <form action="/add/" method="post" class="form-inline">
+        {% csrf_token %}
+        <input type="text" name="expanded">
+        <label>Expanded</label>
+        <input type="text" name="shortened">
+        <label>Shortened</label>
+        <input type="submit" value="Add Url" class="btn btn-success" />
+      </form>
+    </div>
+
+    <table class = "table-striped">
+      <caption>Shortened urls</caption>
+      <thead>
+        <tr>
+          <th>
+            Shortened
+          </th>
+          <th>
+            Expanded
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for url in urls %}
+        <tr>
+          <td>
+            {{url.shortened}}
+          </td>
+          <td>
+            {{url.expanded}}
+          </td>
+          <td>
+            <a href="/remove/{{ url.id }}">X</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+
+  </div>
+</body>
+</html>
